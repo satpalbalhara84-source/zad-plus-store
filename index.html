@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zad Plus Technology | Security Store</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f5f6f8;color:#16181d}
+header{background:#0b0d10;color:#fff;position:sticky;top:0;z-index:5}
+.nav{max-width:1200px;margin:auto;padding:14px 18px;display:flex;align-items:center;gap:18px}.logo{font-size:22px;font-weight:800;color:#fff}.logo span{color:#e31b23}
+.search{flex:1;padding:11px 14px;border-radius:8px;border:1px solid #333;background:#171a1f;color:#fff}.cartbtn{border:0;border-radius:8px;padding:11px 15px;background:#e31b23;color:#fff;font-weight:700;cursor:pointer}
+.hero{background:linear-gradient(120deg,#090b0e,#20252c);color:#fff;padding:55px 18px}.hero-inner{max-width:1200px;margin:auto}.hero h1{font-size:42px;margin:0 0 12px}.hero p{font-size:18px;color:#d7d9dd}.wrap{max-width:1200px;margin:auto;padding:25px 18px}
+.cats{display:flex;gap:10px;overflow:auto;margin-bottom:22px}.cat{white-space:nowrap;padding:10px 16px;border:1px solid #ddd;border-radius:22px;background:#fff;cursor:pointer}.cat.active{background:#e31b23;color:#fff;border-color:#e31b23}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.card{background:#fff;border-radius:12px;padding:14px;box-shadow:0 2px 12px #00000010}.pic{height:180px;background:#eef0f3;border-radius:9px;display:flex;align-items:center;justify-content:center;overflow:hidden}.pic img{width:100%;height:100%;object-fit:contain}.card h3{font-size:16px;margin:13px 0 7px}.price{font-size:20px;font-weight:800}.old{text-decoration:line-through;color:#999;font-size:13px;margin-left:6px}.add{width:100%;margin-top:12px;padding:11px;border:0;border-radius:8px;background:#111;color:#fff;font-weight:700;cursor:pointer}.empty{text-align:center;padding:50px;color:#777}
+.overlay{display:none;position:fixed;inset:0;background:#0008;z-index:10}.panel{background:#fff;width:min(520px,94vw);height:100%;margin-left:auto;padding:22px;overflow:auto}.overlay.show{display:block}.close{float:right;border:0;background:#eee;border-radius:7px;padding:8px;cursor:pointer}.cartrow{display:flex;gap:12px;border-bottom:1px solid #eee;padding:14px 0}.cartrow img{width:60px;height:60px;object-fit:contain;background:#f1f2f4;border-radius:7px}.qty{display:flex;align-items:center;gap:8px;margin-top:6px}.qty button{border:1px solid #ddd;background:#fff;border-radius:5px;padding:3px 8px}.total{font-size:21px;font-weight:800;margin:20px 0}
+form input,form textarea,form select{width:100%;padding:11px;margin:6px 0 10px;border:1px solid #ddd;border-radius:7px}form label{font-size:13px;font-weight:700}.submit{width:100%;padding:13px;border:0;border-radius:8px;background:#e31b23;color:#fff;font-weight:800;cursor:pointer}
+.note{background:#fff5f5;border:1px solid #ffd6d6;padding:10px;border-radius:7px;font-size:13px}
+footer{background:#0b0d10;color:#bbb;text-align:center;padding:30px;margin-top:35px}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}.hero h1{font-size:32px}}@media(max-width:560px){.nav{flex-wrap:wrap}.search{order:3;flex-basis:100%}.grid{grid-template-columns:1fr 1fr}.pic{height:145px}.hero{padding:38px 18px}}
+</style>
+</head>
+<body>
+<header><div class="nav">
+<div class="logo">ZAD PLUS <span>TECHNOLOGY</span></div>
+<input id="search" class="search" placeholder="Search CCTV, GPS, Dashcam...">
+<button class="cartbtn" onclick="openCart()">Cart (<span id="cartCount">0</span>)</button>
+</div></header>
+
+<section class="hero"><div class="hero-inner">
+<h1>Smart Security. Delivered.</h1>
+<p>Shop CCTV Cameras, GPS Trackers, Dashcams and Security Accessories from Zad Plus Technology.</p>
+</div></section>
+
+<main class="wrap">
+<div id="cats" class="cats"></div>
+<div id="products" class="grid"></div>
+</main>
+
+<div id="cartOverlay" class="overlay">
+<div class="panel">
+<button class="close" onclick="closeCart()">✕</button>
+<h2>Your Cart</h2>
+<div id="cartItems"></div>
+<div class="total">Total: ₹<span id="cartTotal">0</span></div>
+<button class="submit" onclick="showCheckout()">Proceed to Checkout</button>
+</div></div>
+
+<div id="checkoutOverlay" class="overlay">
+<div class="panel">
+<button class="close" onclick="closeCheckout()">✕</button>
+<h2>Checkout</h2>
+<div class="note"><b>Cash on Delivery</b><br>Your order will be saved and the order details will be sent to Zad Plus on WhatsApp.</div>
+<form id="checkoutForm">
+<label>Name</label><input id="name" required>
+<label>Mobile</label><input id="phone" inputmode="tel" required>
+<label>Email (optional)</label><input id="email" type="email">
+<label>Address</label><textarea id="address" rows="3" required></textarea>
+<label>City</label><input id="city" required>
+<label>State</label><input id="state" value="Haryana" required>
+<label>Pincode</label><input id="pincode" inputmode="numeric" required>
+<label>Payment Method</label>
+<select id="payment"><option value="COD">Cash on Delivery</option></select>
+<label>Order Notes (optional)</label><textarea id="notes" rows="2"></textarea>
+<button class="submit" type="submit">Place Order</button>
+</form>
+<div id="orderSuccess" style="display:none;margin-top:16px;padding:14px;border-radius:8px;background:#f0fff4;border:1px solid #b7ebc6"></div>
+</div></div>
+
+<footer>Zad Plus Technology · Security Products Store · WhatsApp Orders Available</footer>
+
+<script>
+const SUPABASE_URL="https://YOUR_PROJECT.supabase.co";
+const SUPABASE_KEY="YOUR_PUBLISHABLE_KEY";
+const WHATSAPP="919097979200";
+let products=[],categories=[],cart=JSON.parse(localStorage.getItem("zp_cart")||"[]");
+
+async function api(path,opts={}){
+  const r=await fetch(SUPABASE_URL+"/rest/v1/"+path,{
+    ...opts,headers:{
+      apikey:SUPABASE_KEY,Authorization:"Bearer "+SUPABASE_KEY,
+      "Content-Type":"application/json",...(opts.headers||{})
+    }
+  });
+  if(!r.ok) throw new Error(await r.text());
+  return r.status===204?null:r.json();
+}
+async function load(){
+  try{
+    categories=await api("categories?select=*&is_active=eq.true&order=name");
+    products=await api("products?select=*&is_active=eq.true&order=created_at.desc");
+  }catch(e){
+    products=[
+      {id:"1",name:"CP Plus 2.4MP CCTV Camera",price:1800,sale_price:1600,stock:20,brand:"CP Plus",image_url:""},
+      {id:"2",name:"Zad Plus GPS Tracker",price:2999,sale_price:2499,stock:50,brand:"Zad Plus",image_url:""},
+      {id:"3",name:"Car Dashcam",price:3499,sale_price:2999,stock:15,brand:"Zad Plus",image_url:""}
+    ];
+  }
+  renderCats();renderProducts();updateCart();
+}
+function renderCats(){
+  cats.innerHTML='<button class="cat active" onclick="filterCat(null,this)">All</button>'+
+  categories.map(c=>`<button class="cat" onclick="filterCat('${c.id}',this)">${esc(c.name)}</button>`).join("");
+}
+let selectedCat=null;
+function filterCat(id,el){selectedCat=id;document.querySelectorAll(".cat").forEach(x=>x.classList.remove("active"));el.classList.add("active");renderProducts();}
+function renderProducts(){
+ const q=(search.value||"").toLowerCase();
+ const list=products.filter(p=>(!selectedCat||p.category_id===selectedCat)&&
+ [p.name,p.brand,p.description].join(" ").toLowerCase().includes(q));
+ productsEl.innerHTML=list.length?list.map(p=>`
+ <article class="card">
+  <div class="pic">${p.image_url?`<img src="${esc(p.image_url)}">`:"🔒"}</div>
+  <h3>${esc(p.name)}</h3>
+  <div>${esc(p.brand||"Zad Plus Technology")}</div>
+  <div class="price">₹${num(p.sale_price??p.price)} ${p.sale_price!=null?`<span class="old">₹${num(p.price)}</span>`:""}</div>
+  <button class="add" onclick="add('${p.id}')">Add to Cart</button>
+ </article>`).join(""):"<div class='empty'>No products found.</div>";
+}
+function add(id){const p=products.find(x=>x.id===id);if(!p)return;const i=cart.find(x=>x.id===id);if(i)i.qty++;else cart.push({id:p.id,name:p.name,price:p.sale_price??p.price,image_url:p.image_url||"",qty:1});saveCart();openCart();}
+function saveCart(){localStorage.setItem("zp_cart",JSON.stringify(cart));updateCart();}
+function updateCart(){cartCount.textContent=cart.reduce((a,x)=>a+x.qty,0);cartItems.innerHTML=cart.map((x,i)=>`
+<div class="cartrow"><img src="${esc(x.image_url||"")}"><div style="flex:1"><b>${esc(x.name)}</b><div>₹${num(x.price)}</div><div class="qty"><button onclick="changeQty(${i},-1)">−</button>${x.qty}<button onclick="changeQty(${i},1)">+</button></div></div></div>`).join("")||"<p>Your cart is empty.</p>";cartTotal.textContent=num(cart.reduce((a,x)=>a+x.price*x.qty,0));}
+function changeQty(i,d){cart[i].qty+=d;if(cart[i].qty<=0)cart.splice(i,1);saveCart();}
+function openCart(){cartOverlay.classList.add("show");updateCart()}function closeCart(){cartOverlay.classList.remove("show")}
+function showCheckout(){if(!cart.length)return alert("Cart is empty");closeCart();checkoutOverlay.classList.add("show")}
+function closeCheckout(){checkoutOverlay.classList.remove("show")}
+checkoutForm.addEventListener("submit",async e=>{
+ e.preventDefault();
+ if(!cart.length)return;
+ const customer={name:name.value,phone:phone.value,email:email.value,address:address.value,city:city.value,state:state.value,pincode:pincode.value};
+ const subtotal=cart.reduce((a,x)=>a+x.price*x.qty,0);
+ let order=null;
+ try{
+   const c=await api("customers",{method:"POST",headers:{"Prefer":"return=representation"},body:JSON.stringify(customer)});
+   const cid=c?.[0]?.id||null;
+   const o=await api("orders",{method:"POST",headers:{"Prefer":"return=representation"},body:JSON.stringify({
+     customer_id:cid,customer_name:customer.name,customer_phone:customer.phone,customer_email:customer.email,
+     shipping_address:customer.address,city:customer.city,state:customer.state,pincode:customer.pincode,
+     subtotal,shipping_charge:0,discount:0,total_amount:subtotal,payment_method:payment.value,
+     payment_status:"pending",order_status:"new",notes:notes.value
+   })});
+   order=o?.[0]; 
+   if(order) await api("order_items",{method:"POST",body:JSON.stringify(cart.map(x=>({order_id:order.id,product_id:x.id,product_name:x.name,quantity:x.qty,price:x.price,total:x.price*x.qty})))});
+ }catch(err){ console.warn(err); }
+ const msg=`Zad Plus Technology Order%0AOrder ID: ${order?.id||"Website Order"}%0AName: ${encodeURIComponent(customer.name)}%0AMobile: ${encodeURIComponent(customer.phone)}%0AAddress: ${encodeURIComponent(customer.address+", "+customer.city+", "+customer.state+" - "+customer.pincode)}%0APayment: Cash on Delivery%0A%0AItems:%0A${encodeURIComponent(cart.map(x=>x.name+" x "+x.qty+" = ₹"+x.price*x.qty).join("\\n"))}%0ATotal: ₹${subtotal}`;
+ cart=[];saveCart();closeCheckout();window.open("https://wa.me/"+WHATSAPP+"?text="+msg,"_blank");alert("Order placed. WhatsApp will open with your order details.");
+});
+search.addEventListener("input",renderProducts);
+const productsEl=document.getElementById("products");
+function num(x){return Number(x||0).toLocaleString("en-IN")}
+function esc(x){return String(x??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+load();
+</script>
+</body>
+</html>
