@@ -2,134 +2,110 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Zad Plus Technology | Security Store</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Zad Plus Technology</title>
 
 <style>
 *{box-sizing:border-box}
+
 body{
 margin:0;
 font-family:Arial,sans-serif;
-background:#f5f6f8;
-color:#16181d
+background:#f5f7fb;
+color:#172033
 }
 
 header{
-background:#0b0d10;
+background:#111827;
 color:#fff;
+padding:14px 18px;
 position:sticky;
 top:0;
-z-index:5
+z-index:10
 }
 
 .nav{
-max-width:1200px;
+max-width:1150px;
 margin:auto;
-padding:14px 18px;
 display:flex;
-align-items:center;
-gap:18px
+justify-content:space-between;
+align-items:center
 }
 
 .logo{
-font-size:22px;
-font-weight:800;
-color:#fff
+font-size:21px;
+font-weight:800
 }
 
 .logo span{
-color:#e31b23
-}
-
-.search{
-flex:1;
-padding:11px 14px;
-border-radius:8px;
-border:1px solid #333;
-background:#171a1f;
-color:#fff
+color:#38bdf8
 }
 
 .cartbtn{
 border:0;
-border-radius:8px;
-padding:11px 15px;
-background:#e31b23;
-color:#fff;
+border-radius:9px;
+padding:10px 14px;
 font-weight:700;
 cursor:pointer
 }
 
 .hero{
-background:linear-gradient(120deg,#090b0e,#20252c);
+background:linear-gradient(135deg,#0f172a,#1d4ed8);
 color:#fff;
-padding:55px 18px
-}
-
-.hero-inner{
-max-width:1200px;
-margin:auto
-}
-
-.hero h1{
-font-size:42px;
-margin:0 0 12px
-}
-
-.hero p{
-font-size:18px;
-color:#d7d9dd
+padding:45px 18px
 }
 
 .wrap{
-max-width:1200px;
+max-width:1150px;
 margin:auto;
-padding:25px 18px
+padding:20px 18px
+}
+
+.hero h1{
+margin:0 0 8px;
+font-size:36px
+}
+
+.hero p{
+margin:0
 }
 
 .cats{
 display:flex;
-gap:10px;
+gap:8px;
 overflow:auto;
-margin-bottom:22px
+margin-bottom:18px
 }
 
-.cat{
+.cats button{
 white-space:nowrap;
-padding:10px 16px;
 border:1px solid #ddd;
-border-radius:22px;
 background:#fff;
+border-radius:20px;
+padding:9px 14px;
 cursor:pointer
-}
-
-.cat.active{
-background:#e31b23;
-color:#fff;
-border-color:#e31b23
 }
 
 .grid{
 display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:18px
+grid-template-columns:repeat(auto-fill,minmax(210px,1fr));
+gap:17px
 }
 
 .card{
 background:#fff;
-border-radius:12px;
-padding:14px;
-box-shadow:0 2px 12px #00000010
+border-radius:15px;
+overflow:hidden;
+box-shadow:0 4px 18px #0001
 }
 
 .pic{
-height:180px;
-background:#eef0f3;
-border-radius:9px;
+height:185px;
+background:#eef2f7;
 display:flex;
 align-items:center;
 justify-content:center;
-overflow:hidden
+font-size:55px
 }
 
 .pic img{
@@ -138,39 +114,37 @@ height:100%;
 object-fit:contain
 }
 
-.card h3{
-font-size:16px;
-margin:13px 0 7px
+.info{
+padding:14px
+}
+
+.name{
+font-weight:700;
+min-height:42px
 }
 
 .price{
-font-size:20px;
-font-weight:800
+font-size:21px;
+font-weight:800;
+margin:8px 0
 }
 
-.old{
-text-decoration:line-through;
-color:#999;
-font-size:13px;
-margin-left:6px
-}
-
-.add{
+.add,
+.primary{
 width:100%;
-margin-top:12px;
-padding:11px;
 border:0;
-border-radius:8px;
-background:#111;
+border-radius:9px;
+padding:12px;
+background:#2563eb;
 color:#fff;
-font-weight:700;
+font-weight:800;
 cursor:pointer
 }
 
-.empty{
-text-align:center;
-padding:50px;
-color:#777
+.add:disabled,
+.primary:disabled{
+opacity:.55;
+cursor:not-allowed
 }
 
 .overlay{
@@ -178,126 +152,117 @@ display:none;
 position:fixed;
 inset:0;
 background:#0008;
-z-index:10
-}
-
-.panel{
-background:#fff;
-width:min(520px,94vw);
-height:100%;
-margin-left:auto;
-padding:22px;
+z-index:50;
+padding:12px;
 overflow:auto
 }
 
-.overlay.show{
-display:block
+.modal{
+max-width:650px;
+margin:20px auto;
+background:#fff;
+border-radius:17px;
+padding:20px;
+position:relative
 }
 
 .close{
-float:right;
+position:absolute;
+right:12px;
+top:10px;
 border:0;
-background:#eee;
-border-radius:7px;
-padding:8px;
+border-radius:50%;
+width:33px;
+height:33px;
+font-size:20px;
 cursor:pointer
 }
 
 .cartrow{
 display:flex;
-gap:12px;
-border-bottom:1px solid #eee;
-padding:14px 0
+gap:10px;
+padding:12px 0;
+border-bottom:1px solid #eee
 }
 
-.cartrow img{
-width:60px;
-height:60px;
-object-fit:contain;
-background:#f1f2f4;
-border-radius:7px
+.cartmain{
+flex:1
 }
 
 .qty{
-display:flex;
-align-items:center;
-gap:8px;
-margin-top:6px
+margin-top:7px
 }
 
 .qty button{
-border:1px solid #ddd;
-background:#fff;
-border-radius:5px;
-padding:3px 8px
-}
-
-.total{
-font-size:21px;
-font-weight:800;
-margin:20px 0
-}
-
-form input,
-form textarea,
-form select{
-width:100%;
-padding:11px;
-margin:6px 0 10px;
-border:1px solid #ddd;
-border-radius:7px
-}
-
-form label{
-font-size:13px;
-font-weight:700
-}
-
-.submit{
-width:100%;
-padding:13px;
-border:0;
-border-radius:8px;
-background:#e31b23;
-color:#fff;
-font-weight:800;
+margin-right:5px;
+padding:5px 9px;
 cursor:pointer
 }
 
-.note{
-background:#fff5f5;
-border:1px solid #ffd6d6;
-padding:10px;
-border-radius:7px;
-font-size:13px
+.field{
+margin:10px 0
 }
 
-footer{
-background:#0b0d10;
-color:#bbb;
-text-align:center;
-padding:30px;
-margin-top:35px
+.field label{
+display:block;
+font-size:13px;
+font-weight:700;
+margin-bottom:5px
 }
 
-@media(max-width:900px){
-.grid{
-grid-template-columns:repeat(2,1fr)
+.field input,
+.field textarea,
+.field select{
+width:100%;
+padding:11px;
+border:1px solid #ccc;
+border-radius:8px;
+font-size:15px
 }
+
+.field textarea{
+min-height:70px
+}
+
+.two{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px
+}
+
+.msg{
+display:none;
+padding:11px;
+border-radius:8px;
+white-space:pre-wrap;
+margin-bottom:12px
+}
+
+.error{
+display:block;
+background:#fee2e2;
+color:#991b1b
+}
+
+.success{
+display:block;
+background:#dcfce7;
+color:#166534
+}
+
+.empty{
+padding:35px;
+text-align:center
+}
+
+@media(max-width:600px){
 
 .hero h1{
-font-size:32px
-}
-}
-
-@media(max-width:560px){
-.nav{
-flex-wrap:wrap
+font-size:29px
 }
 
-.search{
-order:3;
-flex-basis:100%
+.two{
+grid-template-columns:1fr
 }
 
 .grid{
@@ -305,12 +270,17 @@ grid-template-columns:1fr 1fr
 }
 
 .pic{
-height:145px
+height:150px
 }
 
-.hero{
-padding:38px 18px
 }
+
+@media(max-width:390px){
+
+.grid{
+grid-template-columns:1fr
+}
+
 }
 </style>
 </head>
@@ -318,44 +288,44 @@ padding:38px 18px
 <body>
 
 <header>
+
 <div class="nav">
 
 <div class="logo">
-ZAD PLUS <span>TECHNOLOGY</span>
+ZAD <span>PLUS</span> TECHNOLOGY
 </div>
 
-<input
-id="search"
-class="search"
-placeholder="Search CCTV, GPS, Dashcam..."
->
-
-<button class="cartbtn" onclick="openCart()">
-Cart (<span id="cartCount">0</span>)
+<button class="cartbtn" id="cartBtn">
+🛒 Cart (<span id="cartCount">0</span>)
 </button>
 
 </div>
+
 </header>
+
 
 <section class="hero">
 
-<div class="hero-inner">
+<div class="wrap">
 
-<h1>Smart Security. Delivered.</h1>
+<h1>Security Products Online</h1>
 
 <p>
-Shop CCTV Cameras, GPS Trackers, Dashcams and Security Accessories from Zad Plus Technology.
+CCTV • GPS Tracker • Dashcam • Accessories
 </p>
 
 </div>
 
 </section>
 
+
 <main class="wrap">
 
-<div id="cats" class="cats"></div>
+<div id="categories" class="cats"></div>
 
-<div id="products" class="grid"></div>
+<div id="products" class="grid">
+Loading products...
+</div>
 
 </main>
 
@@ -364,19 +334,19 @@ Shop CCTV Cameras, GPS Trackers, Dashcams and Security Accessories from Zad Plus
 
 <div id="cartOverlay" class="overlay">
 
-<div class="panel">
+<div class="modal">
 
-<button class="close" onclick="closeCart()">✕</button>
+<button class="close" id="closeCart">×</button>
 
 <h2>Your Cart</h2>
 
-<div id="cartItems"></div>
+<div id="cartList"></div>
 
-<div class="total">
+<h3 style="text-align:right">
 Total: ₹<span id="cartTotal">0</span>
-</div>
+</h3>
 
-<button class="submit" onclick="showCheckout()">
+<button class="primary" id="checkoutBtn">
 Proceed to Checkout
 </button>
 
@@ -389,81 +359,111 @@ Proceed to Checkout
 
 <div id="checkoutOverlay" class="overlay">
 
-<div class="panel">
+<div class="modal">
 
-<button class="close" onclick="closeCheckout()">✕</button>
+<button class="close" id="closeCheckout">
+×
+</button>
 
-<h2>Checkout</h2>
+<h2>Place COD Order</h2>
 
-<div class="note">
+<div id="checkoutMsg" class="msg"></div>
 
-<b>Cash on Delivery</b>
-
-<br>
-
-Your order will be saved and the order details will be sent to Zad Plus on WhatsApp.
-
-</div>
 
 <form id="checkoutForm">
 
-<label>Name</label>
 
-<input id="name" required>
+<div class="field">
 
-
-<label>Mobile</label>
+<label>Name *</label>
 
 <input
-id="phone"
-inputmode="tel"
+id="customerName"
 required
 >
 
+</div>
 
-<label>Email (optional)</label>
+
+<div class="two">
+
+<div class="field">
+
+<label>Mobile *</label>
 
 <input
-id="email"
+id="customerPhone"
+type="tel"
+required
+>
+
+</div>
+
+
+<div class="field">
+
+<label>Email</label>
+
+<input
+id="customerEmail"
 type="email"
 >
 
+</div>
 
-<label>Address</label>
+</div>
+
+
+<div class="field">
+
+<label>Address *</label>
 
 <textarea
-id="address"
-rows="3"
+id="customerAddress"
 required
 ></textarea>
 
+</div>
+
+
+<div class="two">
+
+<div class="field">
 
 <label>City</label>
 
-<input id="city" required>
+<input id="customerCity">
 
+</div>
+
+
+<div class="field">
 
 <label>State</label>
 
-<input
-id="state"
-value="Haryana"
-required
->
+<input id="customerState">
 
+</div>
+
+</div>
+
+
+<div class="two">
+
+<div class="field">
 
 <label>Pincode</label>
 
-<input
-id="pincode"
-inputmode="numeric"
-required
->
+<input id="customerPincode">
+
+</div>
 
 
-<label>Payment Method</label>
+<div class="field">
 
-<select id="payment">
+<label>Payment</label>
+
+<select id="paymentMethod">
 
 <option value="COD">
 Cash on Delivery
@@ -471,115 +471,118 @@ Cash on Delivery
 
 </select>
 
+</div>
 
-<label>Order Notes (optional)</label>
+</div>
 
-<textarea
-id="notes"
-rows="2"
-></textarea>
+
+<div class="field">
+
+<label>Order Notes</label>
+
+<textarea id="orderNotes"></textarea>
+
+</div>
 
 
 <button
-class="submit"
+class="primary"
+id="placeOrderBtn"
 type="submit"
 >
-Place Order
+
+Place COD Order
+
 </button>
+
 
 </form>
 
-<div
-id="orderSuccess"
-style="display:none;margin-top:16px;padding:14px;border-radius:8px;background:#f0fff4;border:1px solid #b7ebc6"
-></div>
-
 </div>
 
 </div>
 
-
-<footer>
-
-Zad Plus Technology · Security Products Store · WhatsApp Orders Available
-
-</footer>
 
 
 <script>
 
-/* =========================
-   SUPABASE CONNECTION
-========================= */
+
+/* ================================
+   SUPABASE SETTINGS
+================================ */
 
 const SUPABASE_URL =
 "https://etnlcmfywrezmzcvmgyh.supabase.co";
 
 const SUPABASE_KEY =
-"sb_publishable_XIgHq_XORaC3lw0bJrsrnw_4p-18zec";
-
-
-/* =========================
-   WHATSAPP NUMBER
-========================= */
+"sb_publishable_XIgqH_XORaC3lw0bJrsrnw_4p-18zec";
 
 const WHATSAPP =
 "919097979200";
 
 
-/* =========================
+/* ================================
    VARIABLES
-========================= */
+================================ */
 
 let products = [];
 
-let categories = [];
-
 let cart =
 JSON.parse(
-localStorage.getItem("zp_cart") || "[]"
+localStorage.getItem("zadplus_cart") || "[]"
 );
 
-let selectedCat = null;
+let currentCategory = "All";
 
 
-/* =========================
-   ELEMENTS
-========================= */
+/* ================================
+   HELPERS
+================================ */
 
-const search =
-document.getElementById("search");
-
-const productsEl =
-document.getElementById("products");
-
-const catsEl =
-document.getElementById("cats");
-
-const cartCount =
-document.getElementById("cartCount");
-
-const cartItems =
-document.getElementById("cartItems");
-
-const cartTotal =
-document.getElementById("cartTotal");
-
-const cartOverlay =
-document.getElementById("cartOverlay");
-
-const checkoutOverlay =
-document.getElementById("checkoutOverlay");
-
-const checkoutForm =
-document.getElementById("checkoutForm");
+const $ = id =>
+document.getElementById(id);
 
 
-/* =========================
+function money(n){
+
+return Number(n || 0)
+.toLocaleString("en-IN");
+
+}
+
+
+function esc(v){
+
+return String(v ?? "")
+.replace(/[&<>"']/g,x=>({
+
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#39;"
+
+}[x]));
+
+}
+
+
+/* UUID CHECK */
+
+function isUUID(v){
+
+return typeof v === "string" &&
+/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+.test(v);
+
+}
+
+
+/* ================================
    SUPABASE API
-========================= */
+================================ */
 
-async function api(path, opts = {}){
+async function api(path,options={}){
 
 const response =
 await fetch(
@@ -587,340 +590,398 @@ SUPABASE_URL +
 "/rest/v1/" +
 path,
 {
-...opts,
+
+...options,
 
 headers:{
-apikey:SUPABASE_KEY,
 
-Authorization:
-"Bearer " +
-SUPABASE_KEY,
+"apikey":SUPABASE_KEY,
+
+"Authorization":
+"Bearer " + SUPABASE_KEY,
 
 "Content-Type":
 "application/json",
 
-...(opts.headers || {})
-}
-}
-);
-
-if(!response.ok){
-
-throw new Error(
-await response.text()
-);
+...(options.headers || {})
 
 }
 
-if(response.status === 204){
-
-return null;
-
-}
-
-return response.json();
-
-}
+});
 
 
-/* =========================
-   LOAD PRODUCTS
-========================= */
+const text =
+await response.text();
 
-async function load(){
+
+let data = null;
 
 try{
 
-categories =
-await api(
-"categories?select=*&is_active=eq.true&order=name"
+data =
+text ? JSON.parse(text) : null;
+
+}catch(e){
+
+data = text;
+
+}
+
+
+/* IMPORTANT:
+   ERROR HIDE NAHI HOGA
+*/
+
+if(!response.ok){
+
+let detail =
+data?.message ||
+data?.hint ||
+data?.details ||
+text ||
+response.statusText;
+
+throw new Error(
+"Supabase " +
+response.status +
+": " +
+detail
 );
 
-products =
-await api(
-"products?select=*&is_active=eq.true&order=created_at.desc"
+}
+
+
+return data;
+
+}
+
+
+/* ================================
+   CART
+================================ */
+
+function saveCart(){
+
+localStorage.setItem(
+"zadplus_cart",
+JSON.stringify(cart)
 );
+
+updateCartCount();
+
+}
+
+
+function updateCartCount(){
+
+$("cartCount").textContent =
+cart.reduce(
+(a,x)=>
+a + Number(x.qty || 0),
+0
+);
+
+}
+
+
+/* ================================
+   CATEGORIES
+================================ */
+
+async function loadCategories(){
+
+try{
+
+const data =
+await api(
+"categories?select=id,name&order=name.asc"
+);
+
+
+$("categories").innerHTML =
+
+`<button
+onclick="selectCategory('All')">
+All
+</button>` +
+
+(data || [])
+.map(c=>`
+
+<button
+onclick="selectCategory('${c.id}')">
+
+${esc(c.name)}
+
+</button>
+
+`)
+.join("");
+
 
 }catch(error){
 
-console.error(
-"Supabase Error:",
+console.log(
+"Category error:",
 error
 );
 
-/*
-Fallback products
-*/
-
-products=[
-
-{
-id:"1",
-name:"CP Plus 2.4MP CCTV Camera",
-price:1800,
-sale_price:1600,
-stock:20,
-brand:"CP Plus",
-image_url:""
-},
-
-{
-id:"2",
-name:"Zad Plus GPS Tracker",
-price:2999,
-sale_price:2499,
-stock:50,
-brand:"Zad Plus",
-image_url:""
-},
-
-{
-id:"3",
-name:"Car Dashcam",
-price:3499,
-sale_price:2999,
-stock:15,
-brand:"Zad Plus",
-image_url:""
 }
-
-];
-
-categories=[];
-
-}
-
-renderCats();
-
-renderProducts();
-
-updateCart();
 
 }
 
 
-/* =========================
-   CATEGORIES
-========================= */
+function selectCategory(id){
 
-function renderCats(){
-
-catsEl.innerHTML =
-
-'<button class="cat active" onclick="filterCat(null,this)">All</button>' +
-
-categories
-.map(
-category =>
-
-`<button
-class="cat"
-onclick="filterCat('${category.id}',this)"
->
-${esc(category.name)}
-</button>`
-
-)
-.join("");
-
-}
-
-
-/* =========================
-   CATEGORY FILTER
-========================= */
-
-function filterCat(id, element){
-
-selectedCat = id;
-
-document
-.querySelectorAll(".cat")
-.forEach(
-button =>
-button.classList.remove("active")
-);
-
-element.classList.add("active");
+currentCategory = id;
 
 renderProducts();
 
 }
 
 
-/* =========================
+/* ================================
    PRODUCTS
-========================= */
+================================ */
+
+async function loadProducts(){
+
+$("products").innerHTML =
+'<div class="empty">Loading products...</div>';
+
+
+try{
+
+products =
+await api(
+"products?select=*&order=created_at.desc"
+) || [];
+
+
+await loadCategories();
+
+renderProducts();
+
+
+}catch(error){
+
+console.error(error);
+
+
+$("products").innerHTML = `
+
+<div
+class="empty"
+style="grid-column:1/-1">
+
+<b>
+Products load nahi ho rahe.
+</b>
+
+<br><br>
+
+${esc(error.message)}
+
+<br><br>
+
+<button
+class="add"
+onclick="loadProducts()">
+
+Retry
+
+</button>
+
+</div>
+
+`;
+
+}
+
+}
+
 
 function renderProducts(){
 
-const query =
-(search.value || "")
-.toLowerCase();
+let list =
+currentCategory === "All"
 
-const list =
-products.filter(product =>
+? products
 
-(!selectedCat ||
-product.category_id === selectedCat)
-
-&&
-
-[
-product.name,
-product.brand,
-product.description
-]
-.join(" ")
-.toLowerCase()
-.includes(query)
-
+: products.filter(
+p =>
+p.category_id ===
+currentCategory
 );
 
 
-productsEl.innerHTML =
+if(!list.length){
 
-list.length ?
+$("products").innerHTML = `
 
-list.map(product => `
+<div
+class="empty"
+style="grid-column:1/-1">
 
-<article class="card">
+No products found.
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+$("products").innerHTML =
+
+list.map(p=>{
+
+let stock =
+Number(p.stock || 0);
+
+let img =
+p.image_url ||
+p.image ||
+"";
+
+
+return `
+
+<div class="card">
+
 
 <div class="pic">
 
 ${
-product.image_url
+img
 
 ?
 
 `<img
-src="${esc(product.image_url)}"
-alt="${esc(product.name)}"
->`
+src="${esc(img)}"
+onerror="this.style.display='none'">`
 
 :
 
-"🔒"
+"📦"
 
 }
 
 </div>
 
 
-<h3>
-${esc(product.name)}
-</h3>
+<div class="info">
 
 
-<div>
-${esc(
-product.brand ||
-"Zad Plus Technology"
-)}
+<div class="name">
+
+${esc(p.name)}
+
 </div>
 
 
 <div class="price">
 
-₹${num(
-product.sale_price ??
-product.price
-)}
+₹${money(p.price)}
 
-${
-product.sale_price != null
+</div>
 
-?
 
-`<span class="old">
-₹${num(product.price)}
-</span>`
+<div>
 
-:
-
-""
-
-}
+Stock: ${stock}
 
 </div>
 
 
 <button
 class="add"
-onclick="add('${product.id}')"
->
-Add to Cart
+${stock <= 0 ? "disabled" : ""}
+onclick="addToCart('${p.id}')">
+
+${
+stock > 0
+?
+"Add to Cart"
+:
+"Out of Stock"
+}
+
 </button>
 
 
-</article>
+</div>
 
-`).join("")
+</div>
 
-:
+`;
 
-"<div class='empty'>No products found.</div>";
+}).join("");
 
 }
 
 
-/* =========================
+/* ================================
    ADD TO CART
-========================= */
+================================ */
 
-function add(id){
+function addToCart(id){
 
-const product =
+const p =
 products.find(
-item => item.id === id
+x => x.id === id
 );
 
-if(!product){
+if(!p)return;
+
+
+const stock =
+Number(p.stock || 0);
+
+
+if(stock <= 0){
+
+alert("Product out of stock");
 
 return;
 
 }
 
-if(
-product.stock !== undefined &&
-product.stock <= 0
-){
 
-alert(
-"Sorry, this product is out of stock."
-);
-
-return;
-
-}
-
-
-const existing =
+const item =
 cart.find(
-item => item.id === id
+x => x.id === id
 );
 
 
-if(existing){
+if(item){
 
-existing.qty++;
+if(item.qty < stock){
+
+item.qty++;
+
+}
 
 }else{
 
 cart.push({
 
-id:product.id,
+id:p.id,
 
-name:product.name,
+name:p.name,
 
-price:
-product.sale_price ??
-product.price,
+price:Number(p.price || 0),
 
 image_url:
-product.image_url || "",
+p.image_url ||
+p.image ||
+"",
 
-qty:1
+qty:1,
+
+stock:stock
 
 });
 
@@ -929,281 +990,336 @@ qty:1
 
 saveCart();
 
-openCart();
-
-}
-
-
-/* =========================
-   SAVE CART
-========================= */
-
-function saveCart(){
-
-localStorage.setItem(
-"zp_cart",
-JSON.stringify(cart)
-);
-
-updateCart();
-
-}
-
-
-/* =========================
-   UPDATE CART
-========================= */
-
-function updateCart(){
-
-cartCount.textContent =
-cart.reduce(
-(total,item) =>
-total + item.qty,
-0
-);
-
-
-cartItems.innerHTML =
-
-cart.length
-
-?
-
-cart.map(
-(item,index) => `
-
-<div class="cartrow">
-
-<img
-src="${esc(item.image_url || "")}"
-alt=""
->
-
-<div style="flex:1">
-
-<b>
-${esc(item.name)}
-</b>
-
-<div>
-₹${num(item.price)}
-</div>
-
-
-<div class="qty">
-
-<button
-onclick="changeQty(${index},-1)"
->
-−
-</button>
-
-${item.qty}
-
-<button
-onclick="changeQty(${index},1)"
->
-+
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-`
-)
-.join("")
-
-:
-
-"<p>Your cart is empty.</p>";
-
-
-cartTotal.textContent =
-num(
-cart.reduce(
-(total,item) =>
-total +
-item.price *
-item.qty,
-0
-)
+alert(
+"Product added to cart"
 );
 
 }
 
 
-/* =========================
-   CHANGE QUANTITY
-========================= */
-
-function changeQty(index, difference){
-
-if(!cart[index]){
-
-return;
-
-}
-
-cart[index].qty +=
-difference;
-
-
-if(cart[index].qty <= 0){
-
-cart.splice(
-index,
-1
-);
-
-}
-
-saveCart();
-
-}
-
-
-/* =========================
-   CART OPEN/CLOSE
-========================= */
+/* ================================
+   CART OPEN
+================================ */
 
 function openCart(){
 
-cartOverlay.classList.add(
-"show"
-);
+renderCart();
 
-updateCart();
+$("cartOverlay").style.display =
+"block";
 
 }
 
 
 function closeCart(){
 
-cartOverlay.classList.remove(
-"show"
+$("cartOverlay").style.display =
+"none";
+
+}
+
+
+function renderCart(){
+
+if(!cart.length){
+
+$("cartList").innerHTML =
+'<div class="empty">Cart empty hai.</div>';
+
+$("cartTotal").textContent =
+"0";
+
+return;
+
+}
+
+
+$("cartList").innerHTML =
+
+cart.map((x,i)=>`
+
+<div class="cartrow">
+
+<div class="cartmain">
+
+<b>
+${esc(x.name)}
+</b>
+
+<br>
+
+₹${money(x.price)}
+× ${x.qty}
+
+
+<div class="qty">
+
+<button
+onclick="changeQty(${i},-1)">
+
+−
+
+</button>
+
+
+${x.qty}
+
+
+<button
+onclick="changeQty(${i},1)">
+
++
+
+</button>
+
+
+<button
+onclick="removeItem(${i})">
+
+Remove
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`)
+.join("");
+
+
+$("cartTotal").textContent =
+money(
+cart.reduce(
+(a,x)=>
+a +
+Number(x.price) *
+Number(x.qty),
+0
+)
 );
 
 }
 
 
-/* =========================
-   CHECKOUT
-========================= */
+function changeQty(i,d){
 
-function showCheckout(){
+cart[i].qty += d;
+
+
+if(cart[i].qty <= 0){
+
+cart.splice(i,1);
+
+}else if(
+cart[i].qty >
+Number(cart[i].stock || 999999)
+){
+
+cart[i].qty =
+Number(cart[i].stock);
+
+}
+
+
+saveCart();
+
+renderCart();
+
+}
+
+
+function removeItem(i){
+
+cart.splice(i,1);
+
+saveCart();
+
+renderCart();
+
+}
+
+
+/* ================================
+   CHECKOUT
+================================ */
+
+function openCheckout(){
 
 if(!cart.length){
 
 alert(
-"Cart is empty"
+"Cart empty hai."
 );
 
 return;
 
 }
 
+
 closeCart();
 
-checkoutOverlay.classList.add(
-"show"
-);
+
+$("checkoutMsg").className =
+"msg";
+
+$("checkoutMsg").textContent =
+"";
+
+
+$("checkoutOverlay").style.display =
+"block";
 
 }
 
 
 function closeCheckout(){
 
-checkoutOverlay.classList.remove(
-"show"
-);
+$("checkoutOverlay").style.display =
+"none";
 
 }
 
 
-/* =========================
+function showError(text){
+
+$("checkoutMsg").className =
+"msg error";
+
+$("checkoutMsg").textContent =
+text;
+
+}
+
+
+/* ================================
+   BUTTONS
+================================ */
+
+$("cartBtn").onclick =
+openCart;
+
+$("closeCart").onclick =
+closeCart;
+
+$("checkoutBtn").onclick =
+openCheckout;
+
+$("closeCheckout").onclick =
+closeCheckout;
+
+
+/* ================================
    PLACE ORDER
-========================= */
+================================ */
 
-checkoutForm.addEventListener(
+$("checkoutForm")
+.addEventListener(
 "submit",
-async function(event){
+async function(e){
 
-event.preventDefault();
+e.preventDefault();
 
 
 if(!cart.length){
+
+showError(
+"Cart empty hai."
+);
 
 return;
 
 }
 
 
+const btn =
+$("placeOrderBtn");
+
+
+btn.disabled = true;
+
+btn.textContent =
+"Saving Order...";
+
+
+/* CUSTOMER DATA */
+
 const customer = {
 
 name:
-document.getElementById(
-"name"
-).value.trim(),
+$("customerName")
+.value.trim(),
 
 phone:
-document.getElementById(
-"phone"
-).value.trim(),
+$("customerPhone")
+.value.trim(),
 
 email:
-document.getElementById(
-"email"
-).value.trim(),
+$("customerEmail")
+.value.trim() ||
+null,
 
 address:
-document.getElementById(
-"address"
-).value.trim(),
+$("customerAddress")
+.value.trim(),
 
 city:
-document.getElementById(
-"city"
-).value.trim(),
+$("customerCity")
+.value.trim() ||
+null,
 
 state:
-document.getElementById(
-"state"
-).value.trim(),
+$("customerState")
+.value.trim() ||
+null,
 
 pincode:
-document.getElementById(
-"pincode"
-).value.trim()
+$("customerPincode")
+.value.trim() ||
+null
 
 };
 
 
+const notes =
+$("orderNotes")
+.value.trim() ||
+null;
+
+
+const payment =
+$("paymentMethod")
+.value;
+
+
 const subtotal =
 cart.reduce(
-(total,item) =>
-total +
-item.price *
-item.qty,
+
+(a,x)=>
+a +
+Number(x.price) *
+Number(x.qty),
+
 0
+
 );
-
-
-let order = null;
 
 
 try{
 
 
-/* CUSTOMER */
+/* =================================
+   STEP 1
+   SAVE CUSTOMER
+================================= */
 
-const customerResult =
+const customerResponse =
 await api(
 "customers",
 {
+
 method:"POST",
 
 headers:{
@@ -1219,16 +1335,20 @@ JSON.stringify(customer)
 
 
 const customerId =
-customerResult?.[0]?.id ||
+customerResponse?.[0]?.id ||
 null;
 
 
-/* ORDER */
+/* =================================
+   STEP 2
+   SAVE MAIN ORDER
+================================= */
 
-const orderResult =
+const orderResponse =
 await api(
 "orders",
 {
+
 method:"POST",
 
 headers:{
@@ -1276,9 +1396,7 @@ total_amount:
 subtotal,
 
 payment_method:
-document.getElementById(
-"payment"
-).value,
+payment,
 
 payment_status:
 "pending",
@@ -1287,9 +1405,7 @@ order_status:
 "new",
 
 notes:
-document.getElementById(
-"notes"
-).value
+notes
 
 })
 
@@ -1297,122 +1413,120 @@ document.getElementById(
 );
 
 
-order =
-orderResult?.[0] ||
-null;
+const order =
+orderResponse?.[0];
 
 
-/* ORDER ITEMS */
+if(!order?.id){
 
-if(order){
+throw new Error(
+"Order ID nahi mila. Orders table insert check karein."
+);
 
-await api(
-"order_items",
-{
-method:"POST",
+}
 
-body:
-JSON.stringify(
 
-cart.map(
-item => ({
+/* =================================
+   STEP 3
+   SAVE ORDER ITEMS
+================================= */
+
+const items =
+cart.map(x=>({
 
 order_id:
 order.id,
 
+/*
+product_id nullable hai.
+Agar UUID valid hai tabhi save hoga.
+*/
+
 product_id:
-item.id,
+isUUID(x.id)
+?
+x.id
+:
+null,
 
 product_name:
-item.name,
+x.name,
 
 quantity:
-item.qty,
+Number(x.qty),
 
 price:
-item.price,
+Number(x.price),
 
 total:
-item.price *
-item.qty
+Number(x.price) *
+Number(x.qty)
 
-})
-)
+}));
 
-)
+
+await api(
+"order_items",
+{
+
+method:"POST",
+
+headers:{
+"Prefer":
+"return=representation"
+},
+
+body:
+JSON.stringify(items)
 
 }
 );
 
-}
 
+/* =================================
+   DATABASE SUCCESS
+   AB WHATSAPP
+================================= */
 
-}catch(error){
+const itemText =
+cart.map(x=>
 
-console.error(
-"Order Error:",
-error
-);
+`${x.name} x ${x.qty} = ₹${money(
+Number(x.price) *
+Number(x.qty)
+)}`
 
-}
-
-
-/* =========================
-   WHATSAPP MESSAGE
-========================= */
-
-const itemsText =
-cart
-.map(
-item =>
-`${item.name} x ${item.qty} = ₹${item.price * item.qty}`
-)
-.join("\n");
-
-
-const fullAddress =
-`${customer.address}, ${customer.city}, ${customer.state} - ${customer.pincode}`;
+).join("\n");
 
 
 const message =
 
-`Zad Plus Technology Order
+`Zad Plus Technology Order\n` +
 
-Order ID: ${
-order?.id ||
-"Website Order"
-}
+`Order ID: ${order.id}\n\n` +
 
-Name: ${
-customer.name
-}
+`Customer: ${customer.name}\n` +
 
-Mobile: ${
-customer.phone
-}
+`Mobile: ${customer.phone}\n` +
 
-Address: ${
-fullAddress
-}
+`Address: ${customer.address}\n` +
 
-Payment: Cash on Delivery
+`City: ${customer.city || ""}\n` +
 
-Items:
+`State: ${customer.state || ""}\n` +
 
-${itemsText}
+`Pincode: ${customer.pincode || ""}\n\n` +
 
-Total: ₹${subtotal}`;
+`Items:\n${itemText}\n\n` +
+
+`Total: ₹${money(subtotal)}\n` +
+
+`Payment: ${payment}`;
 
 
-const whatsappURL =
-
-"https://wa.me/" +
-WHATSAPP +
-"?text=" +
-encodeURIComponent(message);
-
-
-/* CLEAR CART */
+/*
+ONLY AFTER DATABASE SUCCESS
+*/
 
 cart = [];
 
@@ -1421,89 +1535,86 @@ saveCart();
 closeCheckout();
 
 
-/* OPEN WHATSAPP */
+alert(
+"Order successfully saved!\n\n" +
+"Order ID: " +
+order.id
+);
+
+
+/*
+OPEN WHATSAPP
+*/
 
 window.open(
-whatsappURL,
+
+"https://wa.me/" +
+WHATSAPP +
+"?text=" +
+encodeURIComponent(message),
+
 "_blank"
+
 );
 
 
-/* SUCCESS */
+/*
+REFRESH PRODUCTS
+*/
 
-alert(
-"Order placed successfully. WhatsApp will open with your order details."
-);
-
-}
-);
+loadProducts();
 
 
-/* =========================
-   SEARCH
-========================= */
+}catch(error){
 
-search.addEventListener(
-"input",
-renderProducts
+
+console.error(
+"ORDER ERROR:",
+error
 );
 
 
-/* =========================
-   NUMBER FORMAT
-========================= */
+/*
+IMPORTANT:
+ERROR USER KO DIKHEGA
+*/
 
-function num(value){
+showError(
 
-return Number(
-value || 0
-).toLocaleString(
-"en-IN"
+"ORDER SAVE NAHI HUA.\n\n" +
+
+error.message +
+
+"\n\n" +
+
+"Cart delete nahi hua hai. " +
+
+"Error fix hone ke baad dobara try karein."
+
 );
 
-}
+
+}finally{
 
 
-/* =========================
-   HTML ESCAPE
-========================= */
+btn.disabled = false;
 
-function esc(value){
+btn.textContent =
+"Place COD Order";
 
-return String(
-value ?? ""
-)
-.replace(
-/[&<>"']/g,
-
-function(character){
-
-return {
-
-"&":"&amp;",
-
-"<":"&lt;",
-
-">":"&gt;",
-
-'"':"&quot;",
-
-"'":"&#039;"
-
-}[character];
 
 }
 
-);
-
-}
+});
 
 
-/* =========================
-   START STORE
-========================= */
+/* ================================
+   START
+================================ */
 
-load();
+updateCartCount();
+
+loadProducts();
 
 </script>
 
